@@ -106,9 +106,6 @@
    "h v" '(describe-variable :wk "Describe variable")
    "h w" '(where-is :wk "Prints keybinding for command if set")
    "h x" '(describe-command :wk "Display full documentation for command"))
-
-  (sb/leader-keys
-   "p" '(projectile-command-map :wk "Projectile"))
   )
 
 ;; Evil
@@ -130,6 +127,22 @@
   :config
   (add-to-list 'evil-collection-mode-list 'help)
   (evil-collection-init))
+
+(use-package evil-org
+  :ensure t
+  :after (evil org)
+  :hook ((org-mode . evil-org-mode)
+         (org-agenda-mode . evil-org-mode))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-set-key-theme '(navigation todo insert textobjects additional))
+  (evil-org-agenda-set-keys))
+
+(with-eval-after-load 'org
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "C-j") 'org-next-visible-heading)
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "C-k") 'org-previous-visible-heading)
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "M-j") 'org-metadown)
+  (evil-define-key '(normal insert visual) org-mode-map (kbd "M-k") 'org-metaup))
 
 (use-package evil-surround
   :ensure t
