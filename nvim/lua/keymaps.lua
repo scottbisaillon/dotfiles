@@ -73,6 +73,42 @@ nmap_leader('ep', explore_plugins,                      'Plugins directory')
 nmap_leader('eq', explore_quickfix,                     'Quickfix list')
 nmap_leader('eQ', explore_locations,                    'Location list')
 
+-- f is for 'Fuzzy Find'. Common usage:
+-- - `<Leader>ff` - find files; for best performance requires `ripgrep`
+-- - `<Leader>fg` - find inside files (live grep); requires `ripgrep`
+-- - `<Leader>fh` - find help tag
+-- - `<Leader>fr` - resume latest picker
+--
+-- These use 'snacks.picker' (see 'plugin/snacks.lua'). They mirror the Find
+-- group MiniMax powers with 'mini.pick', mapped onto snacks sources. A few
+-- upstream mappings have no direct snacks equivalent: 'mini.visits' paths are
+-- replaced by recent/smart, staged-hunk pickers are dropped, and git hunks map
+-- to 'git_status' / 'git_diff'.
+local pick = function(source) return string.format('<Cmd>lua Snacks.picker.%s()<CR>', source) end
+
+nmap_leader('f/', pick('search_history'),        '"/" history')
+nmap_leader('f:', pick('command_history'),       '":" history')
+nmap_leader('fb', pick('buffers'),               'Buffers')
+nmap_leader('fc', pick('git_log'),               'Commits (all)')
+nmap_leader('fC', pick('git_log_file'),          'Commits (buf)')
+nmap_leader('fd', pick('diagnostics'),           'Diagnostic workspace')
+nmap_leader('fD', pick('diagnostics_buffer'),    'Diagnostic buffer')
+nmap_leader('ff', pick('files'),                 'Files')
+nmap_leader('fg', pick('grep'),                  'Grep live')
+nmap_leader('fG', pick('grep_word'),             'Grep current word')
+nmap_leader('fh', pick('help'),                  'Help tags')
+nmap_leader('fH', pick('highlights'),            'Highlight groups')
+nmap_leader('fl', pick('grep_buffers'),          'Lines (open buffers)')
+nmap_leader('fL', pick('lines'),                 'Lines (buffer)')
+nmap_leader('fm', pick('git_status'),            'Git status')
+nmap_leader('fM', pick('git_diff'),              'Git diff (hunks)')
+nmap_leader('fr', pick('resume'),                'Resume')
+nmap_leader('fR', pick('lsp_references'),        'References (LSP)')
+nmap_leader('fs', pick('lsp_workspace_symbols'), 'Symbols workspace')
+nmap_leader('fS', pick('lsp_symbols'),           'Symbols document')
+nmap_leader('fv', pick('recent'),                'Recent files')
+nmap_leader('fV', pick('smart'),                 'Smart find')
+
 -- l is for 'Language'. Common usage:
 -- - `<Leader>ld` - show more diagnostic details in a floating window
 -- - `<Leader>lr` - perform rename via LSP

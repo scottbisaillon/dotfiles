@@ -8,6 +8,7 @@ require('which-key').setup {
   spec = {
     { '<leader>b', group = 'Buffer', mode = { 'n' } },
     { '<leader>e', group = 'Explore/Edit', mode = { 'n' } },
+    { '<leader>f', group = 'Find', mode = { 'n' } },
     { '<leader>l', group = 'Language', mode = { 'n', 'x' } },
     { '<leader>t', group = 'Terminal', mode = { 'n' } },
   },
