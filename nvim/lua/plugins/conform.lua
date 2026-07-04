@@ -30,7 +30,6 @@ conform.setup {
   end,
 }
 
--- Manually format the current buffer / selection.
-vim.keymap.set({ 'n', 'x' }, '<Leader>f', function() conform.format { async = true, lsp_format = 'fallback' } end, { desc = '[F]ormat buffer' })
+-- Manual formatting is mapped in lua/keymaps.lua as `<Leader>lf` (Language group).
 
 -- vim: ts=2 sts=2 sw=2 et
