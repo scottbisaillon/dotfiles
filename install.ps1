@@ -35,13 +35,14 @@ $ErrorActionPreference = 'Stop'
 $repo = $PSScriptRoot
 
 # Source (relative to this repo) -> Target (absolute). Type: Dir links the whole
-# folder; File links a single file. Unix-only apps (kitty, tmux, zellij) are omitted
-# on Windows - add entries here if you start using them under WSL.
+# folder; File links a single file. Unix-only apps (kitty, tmux) are omitted on
+# Windows - add entries here if you start using them under WSL.
 $links = @(
     @{ Source = 'nvim';                   Target = "$env:LOCALAPPDATA\nvim";                 Type = 'Dir'  }
     @{ Source = 'alacritty';              Target = "$env:APPDATA\alacritty";                 Type = 'Dir'  }
     @{ Source = 'starship\starship.toml'; Target = "$env:USERPROFILE\.config\starship.toml"; Type = 'File' }
-    @{ Source = 'wezterm\.wezterm.lua';   Target = "$env:USERPROFILE\.wezterm.lua";          Type = 'File' }
+    @{ Source = 'wezterm\wezterm.lua';    Target = "$env:USERPROFILE\.config\wezterm\wezterm.lua"; Type = 'File' }
+    @{ Source = 'zellij\config.kdl';      Target = "$env:APPDATA\Zellij\config\config.kdl";  Type = 'File' }
 )
 
 function Write-Status($symbol, $color, $message) {

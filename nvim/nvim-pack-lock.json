@@ -13,6 +13,10 @@
       "rev": "6f793b2bcd2d35e201c09520f698bb763220908a",
       "src": "https://github.com/j-hui/fidget.nvim"
     },
+    "go.nvim": {
+      "rev": "0768d79bbebdb1a112a845f9cd6293bfbd544dab",
+      "src": "https://github.com/ray-x/go.nvim"
+    },
     "gruvbox.nvim": {
       "rev": "154eb5ff5b96d0641307113fa385eaf0d36d9796",
       "src": "https://github.com/ellisonleao/gruvbox.nvim"
