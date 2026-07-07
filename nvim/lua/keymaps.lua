@@ -16,6 +16,11 @@ local nmap = function(lhs, rhs, desc) vim.keymap.set('n', lhs, rhs, { desc = des
 nmap('[p', '<Cmd>exe "put! " . v:register<CR>', 'Paste Above')
 nmap(']p', '<Cmd>exe "put "  . v:register<CR>', 'Paste Below')
 
+-- Paste over a Visual selection without copying the replaced text into the
+-- register. Unlike `p`, `P` doesn't overwrite the unnamed register with the
+-- deleted text, so the yanked text stays available to paste again.
+vim.keymap.set('x', 'p', 'P', { desc = 'Paste (keep register)' })
+
 -- stylua: ignore start
 -- The next part (until `-- stylua: ignore end`) is aligned manually for easier
 -- reading. Consider preserving this or remove `-- stylua` lines to autoformat.
@@ -116,14 +121,14 @@ nmap_leader('fV', pick('smart'),                 'Smart find')
 nmap_leader('la', '<Cmd>lua vim.lsp.buf.code_action()<CR>',     'Actions')
 nmap_leader('ld', '<Cmd>lua vim.diagnostic.open_float()<CR>',   'Diagnostic popup')
 nmap_leader('lf', '<Cmd>lua require("conform").format()<CR>',   'Format')
-nmap_leader('li', '<Cmd>lua vim.lsp.buf.implementation()<CR>',  'Implementation')
+nmap_leader('li', pick('lsp_implementations'),                 'Implementation')
 nmap_leader('lI', '<Cmd>lua vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())<CR>', 'Inlay hints (toggle)')
 nmap_leader('lh', '<Cmd>lua vim.lsp.buf.hover()<CR>',           'Hover')
 nmap_leader('ll', '<Cmd>lua vim.lsp.codelens.run()<CR>',        'Lens')
 nmap_leader('lr', '<Cmd>lua vim.lsp.buf.rename()<CR>',          'Rename')
 nmap_leader('lR', '<Cmd>lua vim.lsp.buf.references()<CR>',      'References')
-nmap_leader('ls', '<Cmd>lua vim.lsp.buf.definition()<CR>',      'Source definition')
-nmap_leader('lt', '<Cmd>lua vim.lsp.buf.type_definition()<CR>', 'Type definition')
+nmap_leader('ls', pick('lsp_definitions'),                     'Source definition')
+nmap_leader('lt', pick('lsp_type_definitions'),                'Type definition')
 
 xmap_leader('lf', '<Cmd>lua require("conform").format()<CR>', 'Format selection')
 

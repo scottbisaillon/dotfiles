@@ -47,3 +47,11 @@ vim.schedule(function()
     update_in_insert = false,
   }
 end)
+
+-- Autocommands ===============================================================
+-- Briefly highlight text on yank, for visual feedback about what was copied.
+vim.api.nvim_create_autocmd('TextYankPost', {
+  desc = 'Highlight when yanking (copying) text',
+  group = vim.api.nvim_create_augroup('highlight-yank', { clear = true }),
+  callback = function() vim.hl.on_yank() end,
+})
